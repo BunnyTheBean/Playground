@@ -1,7 +1,18 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 120%;
-    margin: 2px;
+    font-size: 20pt;
+    border-radius: 4px;
+    color: #222;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    text-align: right;
 }
 
 option {
@@ -20,6 +31,16 @@ option {
     width: 3em;
 }
 
-input {
-    text-align: right;
+header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.fieldRow {
+    margin-top: 8px;
+}
+
+input, select {
+    color: #44b;
 }

@@ -5,39 +5,52 @@
         
     </head>
     <body>
-        <h1>Satinavs Spieluhr</h1>
-        
-        <label>Tag seit 1. Praios 0 BF</label>
-        <input id="absoluteDay" type="number" min="1" oninput="setAllFieldsFromAbsoluteDay()">
-        <br>
+        <main>
+            <div>
+                <header>Satinavs Spieluhr</header>
+                <hr>
 
-        <label>Datum</label>
-        <input id="day" type="number" oninput="setAllFieldsFromDate()">
-        <select id="month" oninput="setAllFieldsFromDate()">
-            <option value="1">PRA</option>
-            <option value="2">RON</option>
-            <option value="3">EFF</option>
-            <option value="4">TRA</option>
-            <option value="5">BOR</option>
-            <option value="6">HES</option>
-            <option value="7">FIR</option>
-            <option value="8">TSA</option>
-            <option value="9">PHE</option>
-            <option value="10">PER</option>
-            <option value="11">ING</option>
-            <option value="12">RAH</option>
-            <option value="13">NLT</option>
-        </select>
-        <input id="year" type="number" min="0" oninput="setAllFieldsFromDate()">
-        <label>BF</label>
-        <br>
+                <div class="fieldRow">
+                    <label><b>Tag seit 1. Praios 0 BF:</b></label>
+                    <input id="absoluteDay" type="number" min="1" oninput="setAllFieldsFromAbsoluteDay()">
+                    <br>
+                </div>
 
-        <label>Wochentag:</label>
-        <label id="weekday"></label>
-        <br>
+                <div class="fieldRow">
+                    <label><b>Datum:</b></label>
+                    <input id="day" type="number" oninput="setAllFieldsFromDate()">
+                    <select id="month" oninput="setAllFieldsFromDate()">
+                        <option value="1">PRA</option>
+                        <option value="2">RON</option>
+                        <option value="3">EFF</option>
+                        <option value="4">TRA</option>
+                        <option value="5">BOR</option>
+                        <option value="6">HES</option>
+                        <option value="7">FIR</option>
+                        <option value="8">TSA</option>
+                        <option value="9">PHE</option>
+                        <option value="10">PER</option>
+                        <option value="11">ING</option>
+                        <option value="12">RAH</option>
+                        <option value="13">NLT</option>
+                    </select>
+                    <input id="year" type="number" min="0" oninput="setAllFieldsFromDate()">
+                    <label>BF</label>
+                    <br>
+                </div>
 
-        <label>Mondphase:</label>
-        <label id="lunarPhase"></label>
+                <div class="fieldRow">
+                    <label><b>Wochentag:</b></label>
+                    <label id="weekday"></label>
+                    <br>
+                </div>
+
+                <div class="fieldRow">
+                    <label><b>Mondphase:</b></label>
+                    <label id="lunarPhase"></label>
+                </div>
+            </div>
+        </main>
 
         <script src="script.js"></script>
     </body>
