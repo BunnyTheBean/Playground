@@ -7,10 +7,10 @@ const lunarPhaseField = document.getElementById("lunarPhase");
 
 const getAbsoluteDay = () => Number(absoluteDayField.value);
 const getDayOfMonth = () => Number(dayField.value);
-const getMonth = () => Number(monthField.value);
+const getMonthValue = () => Number(monthField.value);
 const getYear = () => Number(yearField.value);
-const getWeekday = () => Number(weekdayField.value);
-const getLunarPhase = () => lunarPhaseField.value;
+
+initializeFields();
 
 function calculateDayOfYear() {
     return (getAbsoluteDay() - 1) % 365 + 1;
@@ -82,10 +82,16 @@ function setAllFieldsFromAbsoluteDay() {
     lunarPhaseField.innerHTML = getLunarPhaseNameFromValue(calculateLunarPhaseValue());
 }
 
-function setAbsoluteDayFromDate() {
-    
+function setAllFieldsFromDate() {
+    let absoluteDay = 0;
+    absoluteDay += getDayOfMonth();
+    absoluteDay += (getMonthValue() - 1) * 30;
+    absoluteDay += getYear() * 365;
+    absoluteDayField.value = absoluteDay;
+    setAllFieldsFromAbsoluteDay();
 }
 
-function test() {
+function initializeFields() {
+    absoluteDayField.value = 366825;
     setAllFieldsFromAbsoluteDay();
 }

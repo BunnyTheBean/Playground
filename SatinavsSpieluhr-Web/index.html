@@ -8,12 +8,12 @@
         <h1>Satinavs Spieluhr</h1>
         
         <label>Tag seit 1. Praios 0 BF</label>
-        <input id="absoluteDay" type="number" min="1">
+        <input id="absoluteDay" type="number" min="1" oninput="setAllFieldsFromAbsoluteDay()">
         <br>
 
         <label>Datum</label>
-        <input id="day" type="number">
-        <select id="month">
+        <input id="day" type="number" oninput="setAllFieldsFromDate()">
+        <select id="month" oninput="setAllFieldsFromDate()">
             <option value="1">PRA</option>
             <option value="2">RON</option>
             <option value="3">EFF</option>
@@ -28,7 +28,7 @@
             <option value="12">RAH</option>
             <option value="13">NLT</option>
         </select>
-        <input id="year" type="number" min="0">
+        <input id="year" type="number" min="0" oninput="setAllFieldsFromDate()">
         <label>BF</label>
         <br>
 
@@ -38,8 +38,6 @@
 
         <label>Mondphase:</label>
         <label id="lunarPhase"></label>
-
-        <button type="button" onclick="test()">Test</button>
 
         <script src="script.js"></script>
     </body>
