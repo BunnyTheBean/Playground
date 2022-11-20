@@ -7,3 +7,19 @@
 option {
     font-size: 80%;
 }
+
+#absoluteDay {
+    width: 4.5em;
+}
+
+#day {
+    width: 2em;
+}
+
+#year {
+    width: 3em;
+}
+
+input {
+    text-align: right;
+}
