@@ -2,32 +2,44 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+        
     </head>
     <body>
         <h1>Satinavs Spieluhr</h1>
         
-        <label>Absoluter Tag</label>
-        <input id="absolute-day" type="number" min="1">
-
+        <label>Tag seit 1. Praios 0 BF</label>
+        <input id="absoluteDay" type="number" min="1">
         <br>
 
         <label>Datum</label>
         <input id="day" type="number">
         <select id="month">
-            <option>Praios</option>
-            <option>Rondra</option>
-            <option>Efferd</option>
-            <option>Travia</option>
-            <option>Boron</option>
-            <option>Hesinde</option>
-            <option>Firun</option>
-            <option>Tsa</option>
-            <option>Phex</option>
-            <option>Peraine</option>
-            <option>Ingerimm</option>
-            <option>Rahja</option>
+            <option value="1">PRA</option>
+            <option value="2">RON</option>
+            <option value="3">EFF</option>
+            <option value="4">TRA</option>
+            <option value="5">BOR</option>
+            <option value="6">HES</option>
+            <option value="7">FIR</option>
+            <option value="8">TSA</option>
+            <option value="9">PHE</option>
+            <option value="10">PER</option>
+            <option value="11">ING</option>
+            <option value="12">RAH</option>
+            <option value="13">NLT</option>
         </select>
-        <input id="year" type="number">
+        <input id="year" type="number" min="0">
+        <label>BF</label>
+        <br>
+
+        <label>Wochentag:</label>
+        <label id="weekday"></label>
+        <br>
+
+        <label>Mondphase:</label>
+        <label id="lunarPhase"></label>
+
+        <button type="button" onclick="test()">Test</button>
 
         <script src="script.js"></script>
     </body>
