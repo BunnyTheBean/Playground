@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="styles.css">
         <script src="models.js"></script>
         <script src="script.js"></script>
     </head>
-    <body>
-        <button onclick="test()">Click Me</button>
+    <body class="flex-container-vertical">
+        <header class="flex-container-horizontal">
+            <div class="flex-container-vertical">
+                <div id="class" class="text-field">
+                    <div>Class</div>
+                    <input type="text">
+                </div>
+
+                <div id="level" class="text-field">
+                    <div>Level</div>
+                    <input type="text">
+                </div>
+
+                <div id="subclass" class="text-field">
+                    <div>Subclass</div>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div id="character-name-container" class="flex-container-vertical">
+                <div id="character-name" class="text-field">
+                    <div>Character Name</div>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="flex-container-vertical">
+                <div id="race" class="text-field">
+                    <div>Race</div>
+                    <input type="text">
+                </div>
+
+                <div id="background" class="text-field">
+                    <div>Background</div>
+                    <input type="text">
+                </div>
+
+                <div id="alignment" class="text-field">
+                    <div>Alignment</div>
+                    <input type="text">
+                </div>
+            </div>
+        </header>
     </body>
 </html>
