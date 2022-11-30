@@ -4,10 +4,18 @@
 #include <list>
 using namespace std;
 
-list<int> rollStatSet() {
+class Test {
+    public:
+        Test() {
+            cout << "Test()" << endl;
+        }
 
-}
+        ~Test() {
+            cout << "~Test()" << endl;
+        }
+};
 
 int main() {
-
+    Test* test = new Test();
+    delete test;
 }
