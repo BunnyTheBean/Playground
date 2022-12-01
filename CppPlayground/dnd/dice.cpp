@@ -1,4 +1,5 @@
 #include "dice.hpp"
+#include "normalDistribution.hpp"
 #include <iostream>
 using namespace std;
 
@@ -17,6 +18,22 @@ int Dice::roll(int times, int sidesOfDie, int modifier) {
     }
 
     return sum;
+}
+
+// TODO: use exact probability for smaller numbers of dice
+RollResult Dice::rollWithProbability(int times, int sidesOfDie, int modifier) {
+    RollResult result;
+    result.result = roll(times, sidesOfDie, modifier);
+    
+    double mean = ((double)(sidesOfDie + 1) / 2) * times + modifier;
+    double variance = (double)(sidesOfDie * sidesOfDie - 1) / 12 * times;
+    double standardDeviation = sqrt(variance);
+
+    auto distribution = NormalDistribution(mean, standardDeviation);
+    result.probabilityOfResultOrLower = distribution.cumulativeDensityFunction(result.result + 0.5);
+    result.probabilityOfResultOrHigher = 1.0 - distribution.cumulativeDensityFunction(result.result - 0.5);
+
+    return result;
 }
 
 int Dice::rollOneStat() {
