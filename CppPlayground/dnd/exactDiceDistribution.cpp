@@ -40,14 +40,16 @@ void ExactDiceDistribution::initializeAbsoluteRollFrequencies() {
         int sum = 0;
         for (int j = 0; j < numberOfDice; j++)
         {
-            sum += current % 6 + 1;
-            current /= 6;
+            sum += current % sidesOfDice + 1;
+            current /= sidesOfDice;
         }
+        // Just gonna leave this here as a shameful reminder of my hubris...
+        if (sum > maxRoll) cout << "OH FUCK!" << sum << endl;
         absoluteRollFrequencies[sum]++;
     }
 }
 
-double ExactDiceDistribution::cumulativeDensityFunction(double x) {
+double ExactDiceDistribution::cumulativeDensityFunction(int x) {
     double probability = 0;
     int total = pow(sidesOfDice, numberOfDice);
     for (int i = 0; i <= x; i++)
@@ -57,16 +59,6 @@ double ExactDiceDistribution::cumulativeDensityFunction(double x) {
     return probability;
 }
 
-/*
-class exactDiceDistribution {
-    private:
-        int numberOfDice;
-        int sidesOfDice;
-        int modifier;
-        int absoluteFrequencies[];
-    public:
-        exactDiceDistribution();
-        double cumulativeDensityFunction(double x);
-        double probability(double lower, double upper);
-};
-*/
+double ExactDiceDistribution::probability(int lower, int upper) {
+    return cumulativeDensityFunction(upper) - cumulativeDensityFunction(lower - 1);
+}

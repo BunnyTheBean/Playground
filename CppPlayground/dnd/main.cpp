@@ -2,12 +2,14 @@
 #include "normalDistribution.hpp"
 #include "exactDiceDistribution.hpp"
 #include <iostream>
-#include <iomanip>
-#include <list>
 using namespace std;
 
 int main() {
-    auto dist = ExactDiceDistribution(2, 6);
-    cout << dist.cumulativeDensityFunction(11) << endl;
-    cout << dist.cumulativeDensityFunction(12) << endl;
+    Dice dice = Dice();
+
+    for (int i = 0; i < 9; i++)
+    {
+        auto result = dice.roll(10, 4, 20);
+        cout << result << endl;
+    }
 }

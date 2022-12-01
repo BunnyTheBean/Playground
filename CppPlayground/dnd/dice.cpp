@@ -1,6 +1,6 @@
 #include "dice.hpp"
+#include "exactDiceDistribution.hpp"
 #include "normalDistribution.hpp"
-#include <iostream>
 using namespace std;
 
 Dice::Dice() {
@@ -25,13 +25,23 @@ RollResult Dice::rollWithProbability(int times, int sidesOfDie, int modifier) {
     RollResult result;
     result.result = roll(times, sidesOfDie, modifier);
     
-    double mean = ((double)(sidesOfDie + 1) / 2) * times + modifier;
-    double variance = (double)(sidesOfDie * sidesOfDie - 1) / 12 * times;
-    double standardDeviation = sqrt(variance);
+    double possibilities = pow(sidesOfDie, times);
+    double intMax = pow(2, 31);
 
-    auto distribution = NormalDistribution(mean, standardDeviation);
-    result.probabilityOfResultOrLower = distribution.cumulativeDensityFunction(result.result + 0.5);
-    result.probabilityOfResultOrHigher = 1.0 - distribution.cumulativeDensityFunction(result.result - 0.5);
+    // Use approximation with normal distribution if there are too many dice for an exact calculation.
+    if (possibilities / intMax >= 0.1) {
+        double mean = ((double)(sidesOfDie + 1) / 2) * times + modifier;
+        double variance = (double)(sidesOfDie * sidesOfDie - 1) / 12 * times;
+        double standardDeviation = sqrt(variance);
+
+        auto distribution = NormalDistribution(mean, standardDeviation);
+        result.probabilityOfResultOrLower = distribution.cumulativeDensityFunction(result.result + 0.5);
+        result.probabilityOfResultOrHigher = 1.0 - distribution.cumulativeDensityFunction(result.result - 0.5);
+    } else {
+        auto distribution = ExactDiceDistribution(times, sidesOfDie);
+        result.probabilityOfResultOrLower = distribution.cumulativeDensityFunction(result.result - modifier);
+        result.probabilityOfResultOrHigher = 1.0 - distribution.cumulativeDensityFunction(result.result - modifier - 1);
+    }
 
     return result;
 }
@@ -89,6 +99,7 @@ list<int> Dice::rollStatSet(int min, int max) {
     return set;
 }
 
+/*
 void Dice::printStatSet(list<int> set) {
     int sum = sumOfStatSet(set);
     cout << "(" << sum << ")\t";
@@ -97,4 +108,5 @@ void Dice::printStatSet(list<int> set) {
     }
     cout << endl;
 }
+*/
 

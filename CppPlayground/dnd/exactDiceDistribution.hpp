@@ -10,6 +10,6 @@ class ExactDiceDistribution {
     public:
         ExactDiceDistribution(int number, int sides);
         ~ExactDiceDistribution();
-        double cumulativeDensityFunction(double x);
-        double probability(double lower, double upper);
+        double cumulativeDensityFunction(int x);
+        double probability(int lower, int upper);
 };
