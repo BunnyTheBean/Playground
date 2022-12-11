@@ -1,0 +1,1 @@
+Es sollen alle URLs und Links in Markdown-Files gefunden werden, die inzwischen ins Leere zeigen. Die Files sind in einem hierarchischen Filesystem abgelegt.
