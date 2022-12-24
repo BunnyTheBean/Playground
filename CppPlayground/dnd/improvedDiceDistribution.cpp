@@ -1,17 +1,26 @@
-#include "dice.hpp"
-#include "normalDistribution.hpp"
-#include "exactDiceDistribution.hpp"
-#include "improvedDiceDistribution.hpp"
-#include <iostream>
-#include <iomanip>
 #include <math.h>
-using namespace std;
+#include "improvedDiceDistribution.hpp"
 
-double binomialCoefficient(int n, int k) {
+ImprovedDiceDistribution::ImprovedDiceDistribution(int number, int sides) {
+    this->number = number;
+    this->sides = sides;
+    this->possibilities = (long long) pow(sides, number);
+}
+
+long long ImprovedDiceDistribution::factorial(int number) {
+    long long total = 1;
+    for (int i = number; i > 1; i--) {
+        total *= i;
+    }
+    return total;
+}
+
+long long ImprovedDiceDistribution::binomialCoefficient(int n, int k) {
     //return factorial(n) / (factorial(n - k) * factorial(k));
     // Let's not use factorials, but instead let's optimize this a bit and use doubles that are finally cast back to long long
     // for example: n over k = 50!/(30! * 20!) can instead be calculated as (50*49*...*31)/(20*19*...*1) after simplification
     // To avoid very large numbers (and thus loss of precision), let's switch between multiplying and dividing
+    return 0;
     
     k = (n-k) < k ? n-k : k;
 
@@ -22,38 +31,35 @@ double binomialCoefficient(int n, int k) {
     return total;
 }
 
-double permutations(int sum, int number, int sides) {
+long long ImprovedDiceDistribution::permutations(int sum) {
     // Calculates the possible permutations of dice rolls that add up to a given sum
     // The formula that is used was taken from Luca M on this here forum post:
     // https://math.stackexchange.com/questions/794981/how-many-permutations-of-die-rolls-add-up-to-a-fixed-total
     // k = sum, n = number, replace 6 in the formula with sides
     
-    double total = 0;
+    long long total = 0;
     int imax = (sum - number) / sides;
     for (int i = 0; i <= imax; i++) {
         int sign = i % 2 == 0 ? 1 : -1;
-        double bc1 = binomialCoefficient(number, i);
-        double bc2 = binomialCoefficient(sum - sides*i - 1, sum - sides*i - number);
+        long long bc1 = binomialCoefficient(number, i);
+        long long bc2 = binomialCoefficient(sum - sides*i - 1, sum - sides*i - number);
         total += sign * bc1 * bc2;
     }
     return total;
 }
 
+double ImprovedDiceDistribution::probability(int result) {
+    // Calculates P(X==result)
+    
+    return 0;
+}
 
-// TODO!!!
-int main() {    
-    cout << fixed;
-    cout << setprecision(15);
-    
-    //20d6
-    double possibilities = pow(6, 20);
-    int minRoll = 20;
-    double total = 0;
-    for (int i = minRoll; i <= 120; i++) {
-        double probability = permutations(i, 20, 6) / possibilities;
-        cout << i << "\t" << probability << endl;
-        total += probability;
-    }
-    cout << "\n\nTotal is: " << total << endl;
-    
+double ImprovedDiceDistribution::probability(int lower, int upper) {
+    // Calculates P(lower <= X <= upper)
+    return 0;
+}
+
+double ImprovedDiceDistribution::cumulativeProbability(int result) {
+    // Calculates P(result <= X)
+    return 0;
 }
