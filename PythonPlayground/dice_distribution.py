@@ -1,3 +1,5 @@
+import random
+
 class DiceDistribution:
     number: int
     sides: int
@@ -43,6 +45,12 @@ class DiceDistribution:
         for i in range (lower, upper+1):
             probability += self.probability_of_result(i)
         return probability
+    
+    def roll(self) -> int:
+        result = 0
+        for i in range(self.number):
+            result += random.randint(1, self.sides)
+        return result
 
 def main():
     dist = DiceDistribution(6, 6)
