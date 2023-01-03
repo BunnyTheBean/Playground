@@ -2,6 +2,8 @@ import tkinter as tk
 from dice_distribution import DiceDistribution
 
 class DiceRollGui:
+    
+
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Bunny's Rusty Ol' Rollin' Machine")
@@ -30,21 +32,22 @@ class DiceRollGui:
     
     def create_bindings(self):
         self.roll_button["command"] = self.roll_the_dice
+        self.root.bind("<Control-MouseWheel>", self.zoom)
 
     def configure_fonts(self):
-        small_text_widgets = [
+        self.small_text_widgets = [
             self.dice_label_frame, self.roll_button, self.results_label_frame, 
             self.higher_probability_label, self.lower_probability_label
         ]
 
-        big_text_widgets = [
+        self.big_text_widgets = [
             self.dice_count_entry, self.d_label, self.dice_sides_entry, self.result_label
         ]
         
-        for widget in small_text_widgets:
+        for widget in self.small_text_widgets:
             widget.configure(font=("Arial", 12))
 
-        for widget in big_text_widgets:
+        for widget in self.big_text_widgets:
             widget.configure(font=("Arial", 14))        
 
     def configure_layout(self):
@@ -80,6 +83,23 @@ class DiceRollGui:
             self.result_label["text"] = "Please only enter positive integers!"
             self.lower_probability_label["text"] = "..."
             self.higher_probability_label["text"] = "..."
+    
+    def zoom(self, event):
+        change = 0
+        if event.delta < 0:
+            change = -1
+        else:
+            change = +1
+        
+        for widget in self.small_text_widgets:
+            font = widget.cget("font")
+            font_size = int(font.split(" ")[1])
+            widget.configure(font=("Arial", font_size + change))
+
+        for widget in self.big_text_widgets:
+            font = widget.cget("font")
+            font_size = int(font.split(" ")[1])
+            widget.configure(font=("Arial", font_size + 2*change))
 
 def main():
     DiceRollGui()
