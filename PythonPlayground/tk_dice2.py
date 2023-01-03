@@ -58,8 +58,8 @@ class DiceRollGui:
         self.results_label_frame.pack(fill="x", padx=20)
         self.results_frame.pack()
         self.result_label.pack(pady=4)
-        self.higher_probability_label.pack()
         self.lower_probability_label.pack()
+        self.higher_probability_label.pack()
     
     def configure_geometry(self):
         self.root.geometry("400x300+700+100")
@@ -70,16 +70,16 @@ class DiceRollGui:
             sides = int(self.dice_sides.get())
             distribution = DiceDistribution(count, sides)
             result = distribution.roll()
-            higher_probability = distribution.probability_of_range(result, count * sides)
             lower_probability = distribution.probability_of_range(count, result)
+            higher_probability = distribution.probability_of_range(result, count * sides)            
 
             self.result_label["text"] = f"Result: {result}"
-            self.higher_probability_label["text"] = f"Chance of {result} or higher: {higher_probability * 100:.2f}%"
             self.lower_probability_label["text"] = f"Chance of {result} or lower: {lower_probability * 100:.2f}%"
+            self.higher_probability_label["text"] = f"Chance of {result} or higher: {higher_probability * 100:.2f}%"
         except:
             self.result_label["text"] = "Please only enter positive integers!"
-            self.higher_probability_label["text"] = "..."
             self.lower_probability_label["text"] = "..."
+            self.higher_probability_label["text"] = "..."
 
 def main():
     DiceRollGui()
