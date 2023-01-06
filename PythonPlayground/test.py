@@ -1,10 +1,3 @@
-from dice_distribution import DiceDistribution
-
-distribution = DiceDistribution(8, 8)
-print("Probability of Cone of Cold doing X damage or higher:\n")
-print("X\tProbability in %")
-print("--------------------------")
-
-for i in range (8, 65):
-    probability = distribution.probability_of_range(i, 65)
-    print(f"{i}:\t{probability * 100:.2f}")
+x = 1.00000001
+for i in range(20):
+    print(x := x*x)

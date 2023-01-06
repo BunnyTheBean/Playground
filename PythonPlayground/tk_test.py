@@ -1,32 +1,49 @@
-import tkinter
+import tkinter as tk
 
-class MyApp(tkinter.Frame):
-    def __init__(self, master = None):
-        super().__init__(master)
+class InnerFrame(tk.Frame):
+    pass
+
+# class MiddleFrame(tk.Frame):
+#     def __init__(self, parent):
+#         super().__init__(master=parent)
+#         self.configure(background="red")
+#         self.label1 = tk.Label(master=self, text="AAAH!!", foreground="red")
+#         self.label1.pack()
+
+class MiddleFrame(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(master=parent)
+        self.rowconfigure(index=0)
+        self.rowconfigure(index=1)
+        self.rowconfigure(index=2)
+        self.columnconfigure(index=0)
+        self.columnconfigure(index=1)
+        self.columnconfigure(index=2)
+        for i in range(3):
+            for j in range(3):
+                label = tk.Label(master=self, background=f"#{i*2}{j*2}0")
+                label.grid(row=i, column=j, ipadx=25, ipady=22)
+
+class OuterFrame(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(master=parent)
         self.pack()
-        self.createWidgets()
-    
-    def createWidgets(self):
-        self.nameEntry = tkinter.Entry(self)
-        self.nameEntry.pack()
-        self.name = tkinter.StringVar()
-        self.name.set("Ihr Name...")
-        self.nameEntry["textvariable"] = self.name
-
-        self.ok = tkinter.Button(self)
-        self.ok["text"] = "Ok"
-        self.ok["command"] = self.quit
-        self.ok.pack(side = "right")
-
-        self.rev = tkinter.Button(self)
-        self.rev["text"] = "Umdrehen"
-        self.rev["command"] = self.onReverse
-        self.rev.pack(side = "right")
-
-    def onReverse(self):
-        self.name.set(self.name.get()[::-1])
+        self.rowconfigure(index=0)
+        self.rowconfigure(index=1)
+        self.rowconfigure(index=2)
+        self.columnconfigure(index=0)
+        self.columnconfigure(index=1)
+        self.columnconfigure(index=2)
+        for i in range(3):
+            for j in range(3):
+                if i == 1 and j == 1:
+                    middleframe = MiddleFrame(parent=self)
+                    middleframe.grid(row=i, column=j)
+                else:
+                    label = tk.Label(master=self, background=f"#{i*3}{j*3}c")
+                    label.grid(row=i, column=j, ipadx=100, ipady=100)
 
 
-root = tkinter.Tk()
-app = MyApp(root)
-app.mainloop()
+root = tk.Tk()
+frame = OuterFrame(root)
+root.mainloop()
