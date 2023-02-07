@@ -53,13 +53,13 @@ class DiceDistribution:
         return result
 
 def main():
-    dist = DiceDistribution(6, 6)
+    dist = DiceDistribution(8, 6)
     
-    prob = dist.probability_of_range(15, 20)
-    print(f"15-20:\t{round(prob * 100, 2)}%")
+    prob = dist.probability_of_range(8, 15)
+    print(f"8-15:\t{round(prob * 100, 2)}%")
 
-    prob = dist.probability_of_range(20, 15)
-    print(f"20-15:\t{round(prob * 100, 2)}%")
+    prob = dist.probability_of_range(15, 48)
+    print(f"15-48:\t{round(prob * 100, 2)}%")
 
 if __name__ == "__main__":
     main()
